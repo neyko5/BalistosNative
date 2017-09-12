@@ -43,19 +43,22 @@ export default class BalistosNative extends React.Component {
             placeholder="Password"
           />
           </View> : undefined }
-          <YouTube
-            apiKey="AIzaSyDTSiaGdJ2xrGtvbTvZqXwdVPQmobiBPx0"
-            videoId="KVZ-P-ZI6W4"   // The YouTube video ID
-            play={true}             // control playback of video with true/false      // control whether the video should play in fullscreen or inline
-            loop={true}             // control whether the video should loop when ended
-            controls={0}
-            onReady={e => this.setState({ isReady: true })}
-            onChangeState={e => this.setState({ status: e.state })}
-            onChangeQuality={e => this.setState({ quality: e.quality })}
-            onError={e => this.setState({ error: e.error })}
+          <View style={{position: 'relative'}}>
+            <YouTube
+              apiKey="AIzaSyDTSiaGdJ2xrGtvbTvZqXwdVPQmobiBPx0"
+              videoId="KVZ-P-ZI6W4"   // The YouTube video ID
+              play={true}             // control playback of video with true/false      // control whether the video should play in fullscreen or inline
+              loop={true}             // control whether the video should loop when ended
+              controls={0}
+              onReady={e => this.setState({ isReady: true })}
+              onChangeState={e => this.setState({ status: e.state })}
+              onChangeQuality={e => this.setState({ quality: e.quality })}
+              onError={e => this.setState({ error: e.error })}
 
-            style={{ alignSelf: 'stretch', height: 300 }}
-          />
+              style={{ alignSelf: 'stretch', height: 300 }}
+            />
+            <View style={{position: 'absolute',width: '100%', height: '100%', backgroundColor: 'white', opacity: 0.1}} ></View>
+          </View>
       </View>
     );
   }
