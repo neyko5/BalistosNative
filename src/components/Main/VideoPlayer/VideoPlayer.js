@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import YouTube from 'react-youtube';
+import YouTube from 'react-native-youtube'
 import ReactSlider from 'react-slider';
 import vTime from 'video-time';
+import { View, Button, Text } from 'react-native';
 import { youtubeParams } from '../../../settings';
 
-import './VideoPlayer.css';
+
 
 class VideoPlayer extends React.Component {
   constructor(props) {
@@ -122,18 +123,10 @@ class VideoPlayer extends React.Component {
 
   render() {
     return (
-      <div className="col-lg-6 col-md-6 col-sm-12 no-gutter">
-        <div className="main_window">
-          <div className="video_player">
-            <div className="player">
-              <div className="overlay" />
-              <a
-                href="https://www.youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="youtube"
-                alt="Powered by YouTube"
-              >Powered by YouTube</a>
+        <View className="main_window">
+          <View className="video_player">
+            <View className="player">
+              <View className="overlay" />
               {this.props.current ?
                 <YouTube
                   videoId={this.props.current.video.youtubeId}
@@ -141,37 +134,32 @@ class VideoPlayer extends React.Component {
                   onReady={this.onReady}
                   onEnd={this.finishCurrentVideo}
                 />
-                : <div className="video-empty">
-                  <div className="text-big">No video</div>
-                  <div className="text-small">Make sure you add some new videos to the playlist</div>
-                </div>
+                : <View className="video-empty">
+                  <Text className="text-big">No video</Text>
+                  <Text className="text-small">Make sure you add some new videos to the playlist</Text>
+                </View>
               }
-            </div>
-            <div className="progress">
-              <div className="bar" role="progressbar" style={{ width: `${this.state.elapsed / (this.state.total) * 100}%` }} />
-            </div>
-            <div className="toolbar">
-              <div className="controls">
+            </View>
+            <View className="progress">
+              <View className="bar" role="progressbar" style={{ width: `${this.state.elapsed / (this.state.total) * 100}%` }} />
+            </View>
+            <View className="toolbar">
+              <View className="controls">
                 {this.state.paused ?
-                  <button className="control play" onClick={this.play} /> :
-                  <button className="control pause" onClick={this.pause} />}
-              </div>
-              <div className="timer">
-                <div className="time elapsed">{vTime(this.state.elapsed)}</div>
-                <div className="time total"> / {vTime(this.state.total)} </div>
-              </div>
-              <div className="volume">
-                <button className="speaker" onClick={this.onSpeakerClick} />
-                <ReactSlider
-                  defaultValue={100}
-                  value={this.state.volume}
-                  onChange={this.onSliderChange}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                  <Button className="control play" onClick={this.play} onPress={() => {}} /> :
+                  <Button className="control pause" onClick={this.pause} title="Pause" onPress={() => {}} />}
+              </View>
+              <View className="timer">
+                <Text className="time elapsed">{vTime(this.state.elapsed)}</Text>
+                <Text className="time total"> / {vTime(this.state.total)} </Text>
+              </View>
+              <View className="volume">
+                <Button className="speaker" title="Speaker" onPress={this.onSpeakerClick} />
+                
+              </View>
+            </View>
+          </View>
+        </View>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-native';
 import Login from '../Login/Login';
 import { StyleSheet, Text, View, Image, Button,TouchableHighlight, TextInput, AppRegistry } from 'react-native';
 
@@ -64,14 +65,18 @@ class Header extends React.Component {
     return (
       <View>
         <View style={styles.header}>
-          <Image style={styles.logo}
-            source={require('../../../img/logo.png')}
-          />
-          <Text style={styles.banner}>Balistos {this.props.username}</Text>
+          <Link to='/'>
+            <View style={styles.home}>
+              <Image style={styles.logo}
+                source={require('../../../img/logo.png')}
+              />
+              <Text style={styles.banner}>Balistos {this.props.username}</Text>
+            </View>
+          </Link>
           <TouchableHighlight onPress={this.toggleDropdown} style={styles.dropdown}>
             <Image  source={require('../../../img/dropdown.png')} />
           </TouchableHighlight> 
-        </View>
+        </View>      
         {this.state.opened ?
           <Login /> : undefined }
       </View>
@@ -89,6 +94,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     flexDirection: 'row',
     marginTop: 20
+  },
+  home: {
+    display: 'flex',
+    flexDirection: 'row'
   },
   logo: {
     width: 34,

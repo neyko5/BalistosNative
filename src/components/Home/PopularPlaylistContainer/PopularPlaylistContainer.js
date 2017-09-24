@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import PopularPlaylist from '../PopularPlaylist';
+import PopularPlaylist from '../PopularPlaylist/PopularPlaylist';
 import { fetchPopularPlaylists } from '../../../actions';
 
 function mapStateToProps(state) {
@@ -22,26 +23,20 @@ class PopularPlaylistContainer extends React.Component {
   }
   render() {
     return (
-      <div>
-        <div className="col-lg-6 col-md-6" >
+        <ScrollView style={styles.playlistScroll}> 
           {this.props.playlists
-            .filter((playlist, index) => index < this.props.playlists.length / 2)
             .map((result, index) =>
               <PopularPlaylist data={result} index={index} key={result.id} />)}
-        </div>
-        <div className="col-lg-6 col-md-6" >
-          {this.props.playlists
-            .filter((playlist, index) => index >= this.props.playlists.length / 2)
-            .map((result, index) => (<PopularPlaylist
-              data={result}
-              index={Math.ceil(this.props.playlists.length / 2) + index}
-              key={result.id}
-            />))}
-        </div>
-      </div>
+        </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  playlistScroll: {
+    height: 290
+  }
+});
 
 PopularPlaylistContainer.propTypes = {
   fetchPopularPlaylists: PropTypes.func.isRequired,
