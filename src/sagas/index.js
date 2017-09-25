@@ -90,7 +90,6 @@ export function* fetchPlaylist(action) {
   try {
     const response = yield axios.get(`/playlists/${action.playlistId}`, {});
     if (response.data) {
-      document.title = `Balistos - ${response.data.title}`;
       yield put({ type: actionTypes.SET_INITIAL_PLAYLIST_DATA, playlist: response.data });
     }
   } catch (error) {
@@ -209,7 +208,7 @@ export function* searchYoutube(action) {
     }).get('/youtube/v3/search', {
       params: {
         q: action.query,
-        key: 'AIzaSyA0SUe7isd62Q2wNqHMAG91VFQEANrl7a0',
+        key: 'AIzaSyDUf-SEv49u9KUvsxZ6jwdjkMdZ1aFjQOI',
         part: 'snippet',
         type: 'video',
         videoSyndicated: true,
@@ -231,7 +230,7 @@ export function* getRelatedVideos(action) {
     }).get('/youtube/v3/search', {
       params: {
         relatedToVideoId: action.videoId,
-        key: 'AIzaSyA0SUe7isd62Q2wNqHMAG91VFQEANrl7a0',
+        key: 'AIzaSyDUf-SEv49u9KUvsxZ6jwdjkMdZ1aFjQOI',
         part: 'snippet',
         type: 'video',
         maxResults: 10,
@@ -248,7 +247,6 @@ export function* getRelatedVideos(action) {
 }
 
 export function* expireSession() {
-  localStorage.clear();
   yield put({ type: actionTypes.LOG_OUT });
   yield put({ type: actionTypes.TOGGLE_LOGIN_WINDOW });
   yield put({ type: actionTypes.SET_LOGIN_ERROR, message: 'Your session has expired.' });
