@@ -28,7 +28,7 @@ class SearchPlaylistContainer extends React.Component {
       <View style={styles.searchPlaylist}>
         <View style={styles.inner}>
           <TextInput type="text" autoCapitalize="none" style={styles.input} placeholder="Search playlist" onChangeText={(event) => this.props.onSearchInputChange(event)} />
-          <View style={styles.searchIcon}><Image style={styles.searchIconImage} source={require('../../../img/search.png')} /></View>
+          <View style={styles.searchIcon}><Image style={styles.searchIconImage} source={require('../../img/search.png')} /></View>
         </View>
         {this.props.results.length ? <View style={styles.playlistResults}>
           {this.props.results.map(result => <SearchPlaylistResult key={result.id} result={result} />)}

@@ -12,7 +12,7 @@ import rootSaga from './src/sagas';
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   reducer,
-  applyMiddleware(sagaMiddleware),
+  applyMiddleware(sagaMiddleware)
 );
 
 sagaMiddleware.run(rootSaga);

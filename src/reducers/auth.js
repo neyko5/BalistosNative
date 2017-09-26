@@ -3,14 +3,6 @@ import { AsyncStorage } from 'react-native';
 
 function auth(state = {}, action) {
   switch (action.type) {
-    case actionTypes.AUTH_SET_FROM_STORAGE:
-      return {
-        ...state,
-        token: action.token,
-        username: action.username,
-        userId: action.userId,
-        loggedIn: true,
-      };
     case actionTypes.LOG_OUT:
       return {};
     case actionTypes.SET_LOGIN_ERROR:
@@ -24,7 +16,6 @@ function auth(state = {}, action) {
         loginError: undefined,
       };
     case actionTypes.POST_LOGIN:
-      AsyncStorage.multiSet([['token', action.token],['username', action.username], ['userId', action.userId.toString()]]);
       return {
         ...state,
         username: action.username,

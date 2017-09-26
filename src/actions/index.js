@@ -199,3 +199,9 @@ export function closeAllWindows() {
     type: actionTypes.CLOSE_ALL_WINDOWS,
   };
 }
+
+export function getUserDataFromStorage() {
+  return {
+    type: actionTypes.GET_USER_DATA_FROM_STORAGE,
+  };
+}

@@ -1,5 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import * as actionTypes from '../constants/actionTypes';
+import { AsyncStorage } from 'react-native';
 
 import axios from '../axios';
 
@@ -10,6 +11,7 @@ export function* sendLoginRequest(action) {
       password: action.password,
     });
     if (response.data.success) {
+      AsyncStorage.multiSet([['token', action.token],['username', action.username], ['userId', action.userId.toString()]]);
       yield put({
         type: actionTypes.POST_LOGIN,
         username: action.username,
@@ -24,6 +26,20 @@ export function* sendLoginRequest(action) {
   }
 }
 
+export function* getUserDataFromStorage() {
+  let userData = yield AsyncStorage.multiGet(['token', 'username','userId']);
+  if (userData) {
+    yield put({
+      type: actionTypes.POST_LOGIN,
+      username: userData[1][1],
+      token: userData[0][1],
+      userId: userData[2][1],
+    });
+  } else {
+    yield put({ type: actionTypes.EXPIRE_SESSION });
+  }
+}
+
 export function* sendRegisterRequest(action) {
   try {
     const response = yield axios.post('/authentication/register', {
@@ -31,6 +47,7 @@ export function* sendRegisterRequest(action) {
       password: action.password,
     });
     if (response.data.success) {
+      AsyncStorage.multiSet([['token', action.token],['username', action.username], ['userId', action.userId.toString()]]);
       yield put({
         type: actionTypes.POST_LOGIN,
         username: action.username,
@@ -255,6 +272,7 @@ export function* expireSession() {
 export default function* rootSaga() {
   yield takeEvery(actionTypes.SEND_LOGIN_REQUEST, sendLoginRequest);
   yield takeEvery(actionTypes.SEND_REGISTER_REQUEST, sendRegisterRequest);
+  yield takeEvery(actionTypes.GET_USER_DATA_FROM_STORAGE, getUserDataFromStorage);
   yield takeEvery(actionTypes.FETCH_POPULAR_PLAYLISTS, fetchPopularPlaylists);
   yield takeEvery(actionTypes.SEARCH_PLAYLISTS, searchPlaylists);
   yield takeEvery(actionTypes.CREATE_PLAYLIST, createPlaylist);

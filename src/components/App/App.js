@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NativeRouter, Route } from 'react-router-native';
 
-import Header from '../Header/Header/Header';
-import Home from '../Home/Home/Home';
-import Playlist from '../Main/Playlist/Playlist';
+import Header from '../Header/Header';
+import Home from '../Home/Home';
+import Playlist from '../Main/Playlist';
 import { closeAllWindows } from '../../actions';
 
 import { View } from 'react-native';

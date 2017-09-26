@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-native';
-import Login from '../Login';
+import Login from './Login';
 import { StyleSheet, Text, View, Image, Button,TouchableHighlight, TextInput, AppRegistry } from 'react-native';
 
 import {
@@ -13,6 +13,7 @@ import {
   logOut,
   createPlaylist,
   verifyToken,
+  getUserDataFromStorage
 } from '../../actions';
 
 
@@ -32,6 +33,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   onOpenLoginClick: () => {
     dispatch(toggleLoginWindow());
+  },
+  getUserDataFromStorage: () => {
+    dispatch(getUserDataFromStorage());
   },
   onOpenRegisterClick: () => {
     dispatch(toggleRegisterWindow());
@@ -61,6 +65,9 @@ class Header extends React.Component {
       opened: !this.state.opened
     })
   }
+  componentDidMount() {
+    this.props.getUserDataFromStorage();
+  }
   render() {
     return (
       <View>
@@ -68,13 +75,13 @@ class Header extends React.Component {
           <Link to='/'>
             <View style={styles.home}>
               <Image style={styles.logo}
-                source={require('../../../img/logo.png')}
+                source={require('../../img/logo.png')}
               />
               <Text style={styles.banner}>Balistos {this.props.username}</Text>
             </View>
           </Link>
           <TouchableHighlight onPress={this.toggleDropdown} style={styles.dropdown}>
-            <Image  source={require('../../../img/dropdown.png')} />
+            <Image  source={require('../../img/dropdown.png')} />
           </TouchableHighlight> 
         </View>      
         {this.state.opened ?
