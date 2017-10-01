@@ -8,7 +8,7 @@ import Home from '../Home/Home';
 import Playlist from '../Main/Playlist';
 import { closeAllWindows } from '../../actions';
 
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 
 const mapDispatchToProps = dispatch => ({
   clickOutside: () => {
@@ -16,9 +16,11 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
+console.log(Dimensions.get('window').height);
+
 const App = props => (
     <NativeRouter>
-      <View>
+      <View style={{display: 'flex', height: Dimensions.get("window").height, flexDirection: 'column'}}>
         <Header />
         <Route exact path="/" component={Home} />
         <Route path="/playlist/:playlistId" component={Playlist} />

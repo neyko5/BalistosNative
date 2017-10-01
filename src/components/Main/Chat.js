@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ChatMessage from './ChatMessage';
 import ChatForm from './ChatForm';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const Chat = props => (
-  <View>
-    <View>
-      <Text >Chat with your buddies</Text>
-    </View>
-    <View style={styles.chatbox}>
+  <View style={styles.container}>
+    <Text style={styles.title}>Chat with your buddies</Text>
+    <ScrollView style={styles.chatbox}>
       {props.messages.sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1))
         .map(message => (<ChatMessage
           message={message}
@@ -17,27 +15,25 @@ const Chat = props => (
           key={message.id}
         />))
       }
-    </View>
+    </ScrollView>
     {props.username ? <ChatForm sendMessage={props.sendMessage} /> : undefined}
   </View>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    margin: 5,
+    display: 'flex',
+    flexGrow: 1,
+    flexShrink: 1
+  },
+  title: {
+    lineHeight: 20,
+    fontSize: 16,
+  },
   chatbox: {
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    width: '100%',
-    height: 300
+    flexGrow: 1,
   },
-  message: {
-      marginBottom: 3,
-      color: $title;
-      fontSize: 12
-  },
-  author: {
-      marginRight: 3,
-      fontWeight: '700'
-  }
 });
 
 

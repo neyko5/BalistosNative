@@ -7,7 +7,6 @@ import { View, StyleSheet } from 'react-native';
 const VideoListContainer = props => (
   <View>
     <View style={styles.playlist}>
-      <SearchVideo id={props.playlist.id} />
       <View style={styles.body}>
         <VideoList
           current={props.playlist.current}

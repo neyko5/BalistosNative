@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {View, TextInput, Button, StyleSheet} from 'react-native';
 
 
 class ChatForm extends React.Component {
@@ -15,12 +16,11 @@ class ChatForm extends React.Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value,
+      message: event,
     });
   }
 
   handleSubmit(event) {
-    event.preventDefault();
     if (!this.state.message.trim()) {
       return;
     }
@@ -32,18 +32,39 @@ class ChatForm extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}> 
         <TextInput
           placeholder="Send a message"
           name="message"
           value={this.state.message}
-          onTextChange={this.handleChange}
+          onChangeText={(text) => this.setState({message: text})}
+          style={styles.input}
         />
-        <Button title="Chat" />
+        <Button title="Chat" onPress={this.handleSubmit}/>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10, 
+    backgroundColor: '#e8e8e8'
+  },
+  input: {
+    backgroundColor: '#f7f9f9',
+    borderWidth: 1,
+    borderColor: '#d9e0e2',
+    height: 35,
+
+    borderRadius: 3,
+    fontSize: 13,
+    lineHeight: 13,
+    paddingHorizontal: 10,
+    paddingVertical: 11,
+    marginBottom: 7
+  },
+});
 
 ChatForm.propTypes = {
   sendMessage: PropTypes.func.isRequired,

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import {
@@ -16,7 +16,11 @@ import {
 } from '../../actions';
 
 import VideoPlayer from './VideoPlayer';
+import ChatContainer from './ChatContainer';
+import SearchVideo from './SearchVideo';
 import VideoListContainer from './VideoListContainer';
+import RelatedVideos from './RelatedVideos';
+import TabNavigation from './TabNavigation';
 
 import { API_INDEX } from '../../settings';
 
@@ -66,6 +70,10 @@ class Playlist extends React.Component {
   constructor(props) {
     super(props);
     this.heartbeat = this.heartbeat.bind(this);
+    this.switchTab = this.switchTab.bind(this);
+    this.state = {
+      tab: 'search'
+    }
   }
   componentDidMount() {
     this.initPlaylist();
@@ -99,10 +107,15 @@ class Playlist extends React.Component {
     }
     setTimeout(this.heartbeat, 60000);
   }
+  switchTab(tab) {
+    this.setState({
+      tab: tab
+    })
+  }
   render() {
     return (
-      <View>
-          {/* <VideoPlayer
+      <View style={{flexGrow: 1, flexShrink: 1}}>
+          <VideoPlayer
             playlistTitle={this.props.playlist.title}
             current={this.props.playlist.current}
             username={this.props.username}
@@ -110,8 +123,14 @@ class Playlist extends React.Component {
             finishVideo={this.props.finishVideo}
             startVideo={this.props.startVideo}
             deleteVideo={this.props.deleteVideo}
-          /> */}
-          <VideoListContainer playlist={this.props.playlist} />
+          />
+          <View style={{flexShrink: 1, flexGrow: 1}}>
+            {this.state.tab === 'search' ? <SearchVideo id={this.props.playlist.id} /> : undefined }
+            {this.state.tab === 'list' ? <VideoListContainer playlist={this.props.playlist} /> : undefined }
+            {this.state.tab === 'chat' ? <ChatContainer playlist={this.props.playlist} /> : undefined}
+            {this.state.tab === 'related' ? <RelatedVideos /> : undefined}
+          </View>
+          <TabNavigation onTabSwitch={this.switchTab} selectedTab={this.state.tab}/>
       </View>
     );
   }

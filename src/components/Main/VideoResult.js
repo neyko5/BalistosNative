@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 import { Image, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const VideoResult = props => (
-  <TouchableOpacity onPress={props.onItemClick} style={StyleSheet.button}>
+  <TouchableOpacity onPress={props.onItemClick} style={styles.button}>
     <Image source={{uri: props.image}} style={styles.img}/>
     <Text style={styles.title}>{props.title}</Text>
   </TouchableOpacity>
 );
 const styles = StyleSheet.create({
   button: {
-    width: 400,
     paddingHorizontal: 5,
     paddingVertical: 1,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   img: {
       height: 40,
@@ -24,9 +23,8 @@ const styles = StyleSheet.create({
       lineHeight: 40,
       fontSize: 14,
       color: '#333333',
-      overflow: 'hidden',
       height: 40,
-      flex: 1
+      flexShrink: 1,
   }
 });
 

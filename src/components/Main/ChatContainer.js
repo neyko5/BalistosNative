@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Chat from './Chat';
 import ChatOnline from './ChatOnline';
-import { sendMessage } from '../../../actions';
+import { sendMessage } from '../../actions';
 
 
 function mapStateToProps(state) {
@@ -17,14 +17,14 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   sendMessage: (message) => {
-    dispatch(sendMessage(message, ownProps.id));
+    dispatch(sendMessage(message, ownProps.playlist.id));
   },
 });
 
 class ChatContainer extends React.Component {
   render() {
     return (
-      <View >
+      <View style={styles.container}>
         {this.props.users && this.props.users.length ?
           <ChatOnline users={this.props.users} username={this.props.username} /> : undefined}
         <Chat
@@ -36,6 +36,16 @@ class ChatContainer extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    flexShrink: 1
+  },
+});
+
 
 ChatContainer.propTypes = {
   username: PropTypes.string,

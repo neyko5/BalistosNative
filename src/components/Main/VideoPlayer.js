@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-native-youtube'
-import ReactSlider from 'react-slider';
 import vTime from 'video-time';
-import { View, Button, Text } from 'react-native';
+import { View, Button, Text, Slider, StyleSheet } from 'react-native';
 import { youtubeParams } from '../../settings';
 
 
@@ -112,28 +111,27 @@ class VideoPlayer extends React.Component {
     });
     /* this.state.player.pauseVideo(); */
   }
-  updateElapsed() {
-    /* this.setState({
-      elapsed: this.state.player.getCurrentTime(),
-      total: this.state.player.getDuration(),
-    }); */
-    this.timeout = setTimeout(this.updateElapsed, 500);
+  updateElapsed(event) {
+    this.setState({
+      elapsed: event.currentTime,
+      total: event.duration,
+    });
   }
 
   render() {
     return (
-        <View className="main_window">
-          <View className="video_player">
-            <View className="player">
+          <View>
+            <View>
               <View className="overlay" />
               {this.props.current ?
                 <YouTube
-                  style={{height: 300, width: '100%'}}
+                  style={styles.player}
                   videoId={this.props.current.video.youtubeId}  // The YouTube video ID
-                  play={true}             // control playback of video with true/fals  
+                  play={!this.state.paused}             // control playback of video with true/fals  
                   loop={true}    
                   controls={0} 
                   origin='https://www.youtube.com'
+                  onProgress={this.updateElapsed}
                 />
                 : <View className="video-empty">
                   <Text className="text-big">No video</Text>
@@ -142,28 +140,47 @@ class VideoPlayer extends React.Component {
               }
             </View>
             <View className="progress">
-              <View className="bar" role="progressbar" style={{ width: `${this.state.elapsed / (this.state.total) * 100}%` }} />
+              <View className="bar" role="progressbar" />
             </View>
-            <View className="toolbar">
-              <View className="controls">
-                {this.state.paused ?
-                  <Button className="control play" onClick={this.play} onPress={() => {}} /> :
-                  <Button className="control pause" onClick={this.pause} title="Pause" onPress={() => {}} />}
+            <View style={styles.toolbar}>
+              <View style={styles.control}>
+              {this.state.paused ? 
+                <Button onPress={this.play} title="Play" style={styles.controlButton}/> :
+                <Button onPress={this.pause} title="Pause" style={styles.controlButton} />}
               </View>
-              <View className="timer">
-                <Text className="time elapsed">{vTime(this.state.elapsed)}</Text>
-                <Text className="time total"> / {vTime(this.state.total)} </Text>
-              </View>
-              <View className="volume">
-                <Button className="speaker" title="Speaker" onPress={this.onSpeakerClick} />
-                
+              <View style={styles.timer}>
+                <Text>{vTime(this.state.elapsed)}</Text>
+                <Text> / {vTime(this.state.total)} </Text>
               </View>
             </View>
           </View>
-        </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  player: {
+    minHeight: 216, 
+    width: '100%'
+  },
+  toolbar: {
+    height: 30,
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '100%',
+    justifyContent: 'space-between'
+  },
+  control: {
+    marginRight: 'auto'
+  },
+  timer: {
+    marginLeft: 'auto',
+    backgroundColor: 'yellow',
+    width: 100,
+    display: 'flex',
+    flexDirection: 'row'
+  }
+});
 
 VideoPlayer.propTypes = {
   playlistTitle: PropTypes.string,

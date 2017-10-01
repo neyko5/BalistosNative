@@ -70,7 +70,7 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <View>
+      <View style={{height: 70}}>
         <View style={styles.header}>
           <Link to='/'>
             <View style={styles.home}>

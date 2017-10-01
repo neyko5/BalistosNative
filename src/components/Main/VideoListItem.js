@@ -136,7 +136,8 @@ const styles = StyleSheet.create({
       paddingHorizontal: 8,
       position: 'relative',
       height: '100%',
-      flexGrow: 1
+      flexGrow: 1,
+      flexShrink: 1
   },
   title: {
       fontSize: 15,
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
 
 VideoListItem.propTypes = {
   index: PropTypes.number.isRequired,
-  userId: PropTypes.number,
+  userId: PropTypes.string,
   deleteVideo: PropTypes.func.isRequired,
   likeVideo: PropTypes.func.isRequired,
   video: PropTypes.shape({

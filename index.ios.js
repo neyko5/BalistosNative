@@ -16,6 +16,7 @@ const store = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
+console.disableYellowBox = true;
 
 export default class BalistosNative extends React.Component {
   render() {
