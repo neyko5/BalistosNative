@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "BalistosNative.app"
-               BlueprintName = "BalistosNative"
-               ReferencedContainer = "container:BalistosNative.xcodeproj">
+               BuildableName = "Balistos.app"
+               BlueprintName = "Balistos"
+               ReferencedContainer = "container:Balistos.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "BalistosNativeTests.xctest"
-               BlueprintName = "BalistosNativeTests"
-               ReferencedContainer = "container:BalistosNative.xcodeproj">
+               BuildableName = "BalistosTests.xctest"
+               BlueprintName = "BalistosTests"
+               ReferencedContainer = "container:Balistos.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "BalistosNativeTests.xctest"
-               BlueprintName = "BalistosNativeTests"
-               ReferencedContainer = "container:BalistosNative.xcodeproj">
+               BuildableName = "BalistosTests.xctest"
+               BlueprintName = "BalistosTests"
+               ReferencedContainer = "container:Balistos.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "BalistosNative.app"
-            BlueprintName = "BalistosNative"
-            ReferencedContainer = "container:BalistosNative.xcodeproj">
+            BuildableName = "Balistos.app"
+            BlueprintName = "Balistos"
+            ReferencedContainer = "container:Balistos.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "BalistosNative.app"
-            BlueprintName = "BalistosNative"
-            ReferencedContainer = "container:BalistosNative.xcodeproj">
+            BuildableName = "Balistos.app"
+            BlueprintName = "Balistos"
+            ReferencedContainer = "container:Balistos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "BalistosNative.app"
-            BlueprintName = "BalistosNative"
-            ReferencedContainer = "container:BalistosNative.xcodeproj">
+            BuildableName = "Balistos.app"
+            BlueprintName = "Balistos"
+            ReferencedContainer = "container:Balistos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

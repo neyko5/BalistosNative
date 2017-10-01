@@ -1,4 +1,4 @@
-package com.balistosnative;
+package com.balistos;
 
 import android.app.Application;
 
