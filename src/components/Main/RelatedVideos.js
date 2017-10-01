@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RelatedVideoItem from './RelatedVideoItem';
-import { View, Text} from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 function mapStateToProps(state) {
   return {
@@ -13,20 +13,22 @@ function mapStateToProps(state) {
 
 const RelatedVideos = props => (
   <View>
-    <View>
-      <View>
-        <Text>Related videos</Text>
-      </View>
-      <View>
+      <Text>Related videos</Text>
+      <ScrollView style={styles.relatedVideos}>
         {props.related.map(video => (<RelatedVideoItem
           video={video}
           id={props.id}
           key={video.id.videoId}
         />))}
-      </View>
-    </View>
+      </ScrollView>
   </View>
 );
+
+const styles = StyleSheet.create({
+  relatedVideos: {
+    flexShrink: 1
+  }
+});
 
 RelatedVideos.propTypes = {
   id: PropTypes.number,

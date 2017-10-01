@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    height: 100,
-    position: 'relative'
+    height: 68,
+    marginBottom: 5
   },
   vote: {
     display: 'flex',
@@ -124,12 +124,12 @@ const styles = StyleSheet.create({
   },
   imgWrapper: {
     width: 120,
-    height: 90,
+    height: 68,
     position: 'relative'
   },
   img: {
     width: 120,
-    height: 90
+    height: 68
   },
   info: {
       paddingVertical: 0,

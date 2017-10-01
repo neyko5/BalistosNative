@@ -25,6 +25,7 @@ class ChatForm extends React.Component {
       return;
     }
     this.props.sendMessage(this.state.message);
+    this.props.onNewMessage();
     this.setState({
       message: '',
     });

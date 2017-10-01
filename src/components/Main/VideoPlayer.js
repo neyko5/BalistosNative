@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-native-youtube'
 import vTime from 'video-time';
-import { View, Button, Text, Slider, StyleSheet } from 'react-native';
+import { View, Button, Text, Slider, StyleSheet, TouchableOpacity } from 'react-native';
 import { youtubeParams } from '../../settings';
 
 
@@ -71,6 +71,8 @@ class VideoPlayer extends React.Component {
       this.setState({
         volume: this.state.previousVolume,
         previousVolume: 0,
+        elapsed: 0,
+        total: 1
       });
       this.state.player.setVolume(this.state.previousVolume);
     } else {
@@ -140,17 +142,15 @@ class VideoPlayer extends React.Component {
               }
             </View>
             <View className="progress">
-              <View className="bar" role="progressbar" />
+              <View className="bar" />
             </View>
             <View style={styles.toolbar}>
-              <View style={styles.control}>
               {this.state.paused ? 
-                <Button onPress={this.play} title="Play" style={styles.controlButton}/> :
-                <Button onPress={this.pause} title="Pause" style={styles.controlButton} />}
-              </View>
+                <TouchableOpacity onPress={this.play}><Text style={styles.controlButton}>Play</Text></TouchableOpacity> :
+                <TouchableOpacity onPress={this.pause}><Text style={styles.controlButton}>Pause</Text></TouchableOpacity>}
               <View style={styles.timer}>
-                <Text>{vTime(this.state.elapsed)}</Text>
-                <Text> / {vTime(this.state.total)} </Text>
+                <Text style={styles.timerText}>{vTime(this.state.elapsed)}</Text>
+                <Text style={styles.timerText}> / {vTime(this.state.total)} </Text>
               </View>
             </View>
           </View>
@@ -160,25 +160,28 @@ class VideoPlayer extends React.Component {
 
 const styles = StyleSheet.create({
   player: {
-    minHeight: 216, 
+    minHeight: 212, 
     width: '100%'
   },
   toolbar: {
-    height: 30,
+    height: 20,
     display: 'flex',
     flexWrap: 'wrap',
     width: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    flexDirection: 'row'
   },
-  control: {
-    marginRight: 'auto'
+  controlButton: {
+    lineHeight: 20,
+    fontSize: 13
   },
   timer: {
-    marginLeft: 'auto',
-    backgroundColor: 'yellow',
-    width: 100,
     display: 'flex',
     flexDirection: 'row'
+  },
+  timerText: {
+    lineHeight: 20,
+    fontSize: 13
   }
 });
 

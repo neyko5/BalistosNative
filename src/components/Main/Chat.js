@@ -4,21 +4,25 @@ import ChatMessage from './ChatMessage';
 import ChatForm from './ChatForm';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-const Chat = props => (
-  <View style={styles.container}>
-    <Text style={styles.title}>Chat with your buddies</Text>
-    <ScrollView style={styles.chatbox}>
-      {props.messages.sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1))
-        .map(message => (<ChatMessage
-          message={message}
-          username={props.username}
-          key={message.id}
-        />))
-      }
-    </ScrollView>
-    {props.username ? <ChatForm sendMessage={props.sendMessage} /> : undefined}
-  </View>
-);
+class Chat extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Chat with your buddies</Text>
+        <ScrollView style={styles.chatbox} ref="scrollView">
+          {this.props.messages.sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1))
+            .map(message => (<ChatMessage
+              message={message}
+              username={this.props.username}
+              key={message.id}
+            />))
+          }
+        </ScrollView>
+        {this.props.username ? <ChatForm sendMessage={this.props.sendMessage} onNewMessage={() => this.refs.scrollView.scrollToEnd()} /> : undefined}
+      </View>
+    )
+  }
+} 
 
 const styles = StyleSheet.create({
   container: {

@@ -70,16 +70,17 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <View style={{height: 70}}>
+      <View>
         <View style={styles.header}>
           <Link to='/'>
             <View style={styles.home}>
               <Image style={styles.logo}
                 source={require('../../img/logo.png')}
               />
-              <Text style={styles.banner}>Balistos {this.props.username}</Text>
+              <Text style={styles.banner}>Balistos</Text>
             </View>
           </Link>
+          <Text>{this.props.username}</Text>
           <TouchableHighlight onPress={this.toggleDropdown} style={styles.dropdown}>
             <Image  source={require('../../img/dropdown.png')} />
           </TouchableHighlight> 
@@ -100,7 +101,9 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomWidth: 1,
     flexDirection: 'row',
-    marginTop: 20
+    marginTop: 20,
+    zIndex: 40,
+    overflow: 'visible'
   },
   home: {
     display: 'flex',

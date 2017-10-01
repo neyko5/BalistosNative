@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import VideoListItem from './VideoListItem';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const VideoList = (props) => {
   if (props.videos.empty) {
@@ -9,7 +9,7 @@ const VideoList = (props) => {
   }
 
   return (
-    <View className="video-list">
+    <ScrollView style={styles.container}>
       {props.current ? <VideoListItem
         video={props.current}
         key={props.current.id}
@@ -20,14 +20,13 @@ const VideoList = (props) => {
           a.likes.reduce((total, like) => total + like.value, 0);
         return diff === 0 ? a.id - b.id : diff;
       }).map((video, index) => <VideoListItem video={video} key={video.id} index={index + 1} />)}
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  emptyItem: {
-    color: '#3e414c',
-    padding: 10
+  container: {
+    flexShrink: 1
   }
 });
 

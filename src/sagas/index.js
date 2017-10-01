@@ -11,7 +11,7 @@ export function* sendLoginRequest(action) {
       password: action.password,
     });
     if (response.data.success) {
-      AsyncStorage.multiSet([['token', action.token],['username', action.username], ['userId', action.userId.toString()]]);
+      AsyncStorage.multiSet([['token', response.data.token],['username', action.username], ['userId', response.data.userId.toString()]]);
       yield put({
         type: actionTypes.POST_LOGIN,
         username: action.username,
@@ -22,6 +22,7 @@ export function* sendLoginRequest(action) {
       yield put({ type: actionTypes.SET_LOGIN_ERROR, message: response.data.message });
     }
   } catch (error) {
+    debugger;
     yield put({ type: actionTypes.SET_LOGIN_ERROR, message: error.message });
   }
 }
