@@ -24,7 +24,7 @@ import TabNavigation from './TabNavigation';
 
 import { API_INDEX } from '../../settings';
 
-const socket = io(API_INDEX);
+const socket = io(API_INDEX, {pingTimeout: 30000});
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
@@ -105,7 +105,7 @@ class Playlist extends React.Component {
     } else {
       this.props.getActiveUsers(this.props.match.params.playlistId);
     }
-    setTimeout(this.heartbeat, 60000);
+    //setTimeout(this.heartbeat, 60000);
   }
   switchTab(tab) {
     this.setState({

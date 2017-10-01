@@ -19,14 +19,11 @@ class VideoPlayer extends React.Component {
       paused: false,
       start: 0,
     };
-    this.onReady = this.onReady.bind(this);
-    this.onSpeakerClick = this.onSpeakerClick.bind(this);
-    this.onSliderChange = this.onSliderChange.bind(this);
     this.resumeVideo = this.resumeVideo.bind(this);
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
     this.updateElapsed = this.updateElapsed.bind(this);
-    this.finishCurrentVideo = this.finishCurrentVideo.bind(this);
+    this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
     this.deleteCurrentVideo = this.deleteCurrentVideo.bind(this);
   }
   componentDidUpdate(prevProps) {
@@ -56,16 +53,7 @@ class VideoPlayer extends React.Component {
       };
     }
   }
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
 
-  onReady(event) {
-    /* this.setState({
-      player: event.target,
-    }); */
-    setTimeout(this.updateElapsed, 500);
-  }
   onSpeakerClick() {
     if (this.state.volume === 0) {
       this.setState({
@@ -95,8 +83,10 @@ class VideoPlayer extends React.Component {
       paused: false,
     });
   }
-  finishCurrentVideo() {
-    this.props.finishVideo(this.props.current.id);
+  onPlayerStateChange(event) {
+    if (event.state && event.state === 'unstarted') {
+      this.props.finishVideo(this.props.current.id);
+    }
   }
   deleteCurrentVideo() {
     this.props.deleteVideo(this.props.current.id);
@@ -127,6 +117,7 @@ class VideoPlayer extends React.Component {
               <View className="overlay" />
               {this.props.current ?
                 <YouTube
+                  apiKey="AIzaSyDUf-SEv49u9KUvsxZ6jwdjkMdZ1aFjQOI"
                   style={styles.player}
                   videoId={this.props.current.video.youtubeId}  // The YouTube video ID
                   play={!this.state.paused}             // control playback of video with true/fals  
@@ -134,6 +125,7 @@ class VideoPlayer extends React.Component {
                   controls={0} 
                   origin='https://www.youtube.com'
                   onProgress={this.updateElapsed}
+                  onChangeState={this.onPlayerStateChange}
                 />
                 : <View className="video-empty">
                   <Text className="text-big">No video</Text>

@@ -60,7 +60,6 @@ class SearchVideo extends React.Component {
 
 const styles = StyleSheet.create({
   search: {
-    position: 'relative',
     width: '100%',
     padding: 5,
     zIndex: 2
@@ -78,8 +77,6 @@ const styles = StyleSheet.create({
       margin: 0
   },
   results: {
-      position: 'absolute',
-      top: 43,
       backgroundColor: '#ffffff',
       zIndex: 20,
       backgroundColor: '#f6f6f6',
@@ -88,7 +85,8 @@ const styles = StyleSheet.create({
       borderColor: '#cccccc',
       borderRadius: 3,
       padding: 0,
-      width: '100%'
+      width: '100%',
+      flexGrow: 1
   }
 });
 

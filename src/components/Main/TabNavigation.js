@@ -28,21 +28,23 @@ const styles = StyleSheet.create({
     height: 30,
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: '#eaeaea',
+    backgroundColor: '#eaeaea'
   },
   active: {
     backgroundColor: '#dddddd'
   },
   tabButton: {
-      flex: 1,
       borderColor: '#dcdcdc',
-      borderWidth: 1
-      
+      borderWidth: 1,
+      height: 30,
+      flexGrow: 1
   },
   text: {
       textAlign: 'center',
-      lineHeight: 30,
+      paddingVertical: 9,
       fontSize: 12,
+      lineHeight: 12,
+      height: 30
   }
 });
 

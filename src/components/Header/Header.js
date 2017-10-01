@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-native';
 import Login from './Login';
-import { StyleSheet, Text, View, Image, Button,TouchableHighlight, TextInput, AppRegistry } from 'react-native';
+import { StyleSheet, Text, View, Image, Button,TouchableHighlight, TextInput, Platform } from 'react-native';
 
 import {
   toggleLoginWindow,
@@ -80,7 +80,7 @@ class Header extends React.Component {
               <Text style={styles.banner}>Balistos</Text>
             </View>
           </Link>
-          <Text>{this.props.username}</Text>
+          <Text style={styles.user}>{this.props.username}</Text>
           <TouchableHighlight onPress={this.toggleDropdown} style={styles.dropdown}>
             <Image  source={require('../../img/dropdown.png')} />
           </TouchableHighlight> 
@@ -101,13 +101,16 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomWidth: 1,
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: Platform.OS === 'ios' ? 20: 0,
     zIndex: 40,
-    overflow: 'visible'
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   home: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    
   },
   logo: {
     width: 34,
@@ -115,6 +118,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 10,
     marginRight: 10
+  },
+  user: {
+    color: '#ffffff',
+    lineHeight: 50
   },
   banner: {
     lineHeight: 50,
@@ -125,9 +132,7 @@ const styles = StyleSheet.create({
   dropdown: {
     width: 24,
     height: 24,
-    marginTop: 16,
-    position: 'absolute',
-    right: 10
+    alignSelf: 'center'
   },
   login: {
     backgroundColor: 'white',
